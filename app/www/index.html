@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sh.dongrote.com</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
+      }
+
+      .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80vw;
+        max-width: 42rem;
+        padding: 3rem 2rem;
+        border: 1px solid #f0f0f0;
+        border-radius: 0.8rem;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      code {
+        background-color: #f0f0f0;
+        font-size: 2em; 
+        padding: 1rem;
+        border-radius: 0.8rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body { background-color: #0c0c0c; }
+        code { color: #f7f7f7; background-color: #1c1c1c; }
+        .centered {
+          border: 1px solid #f7f7f7;
+          box-shadow: 0 2px 12px rgba(0.5, 0.5, 0.5, 0.1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="centered">
+      <code class="language-bash">curl https://sh.dongrote.com/setup.sh | sh</code>
+    </div>
+  </body>
+</html>
