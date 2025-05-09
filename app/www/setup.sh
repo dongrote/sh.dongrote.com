@@ -25,6 +25,20 @@ _sudo() {
     fi
 }
 
+_wget_stdout() {
+    which wget 2>&1 >/dev/null
+    if [ $? -eq 0 ] ; then
+        wget -qO- "$1"
+        return $?
+    else
+        which curl 2>&1 >/dev/null
+        if [ $? -eq 0 ] ; then
+            curl -so- "$1"
+            return $?
+        fi
+    fi
+}
+
 arch_package_map() {
     case "$1" in
         *) echo -n "$1" ;;
@@ -115,60 +129,20 @@ install_rust() {
     fi
 }
 
-configure_tmux() {
-  mkdir -p $HOME/.config/tmux/plugins/catppuccin
-  if [ -d $HOME/.config/tmux/plugins/catppuccin/tmux ] ; then
-    rm -rf $HOME/.config/tmux/plugins/catppuccin/tmux
-  fi
-  git clone -b v2.1.3 https://github.com/catppuccin/tmux.git $HOME/.config/tmux/plugins/catppuccin/tmux 2>&1 >/dev/null
+install_dotnet() {
+    _wget_stdout https://sh.dongrote.com/dotnet/install.sh | sh
+}
 
-  mkdir -p $HOME/.tmux/plugins
-  if [ -d $HOME/.tmux/plugins/tpm ] ; then
-    rm -rf $HOME/.tmux/plugins/tpm
-  fi
-  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm 2>&1 >/dev/null
-  cat <<EOF >$HOME/.tmux.conf
-# rebind prefix
-unbind C-b
-set -g prefix C-Space
-bind C-Space send-prefix
+install_nodejs() {
+    _wget_stdout https://sh.dongrote.com/nodejs/install.sh | sh
+}
 
-# Bind Ctrl-h, Ctrl-j, Ctrl-k, and Ctrl-l to switch panes
-# instead of arrow keys
-bind C-h select-pane -L
-bind C-j select-pane -D
-bind C-k select-pane -U
-bind C-l select-pane -R
+install_neovim() {
+    _wget_stdout https://sh.dongrote.com/neovim/install.sh | sh
+}
 
-# List of plugins
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'tmux-plugins/tmux-cpu'
-
-set -g @catppuccin_flavor "mocha"
-set -g @catppuccin_window_status_style "basic"
-set -g @catppuccin_window_text "#W"
-set -g @catppuccin_window_default_text "#W"
-set -g @catppuccin_window_current_text "#W"
-
-run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
-
-# set vi key schema
-setw -g status-keys vi
-
-set -g status-left-length 100
-set -g status-right-length 100
-set -g status-right "#{E:@catppuccin_status_application}"
-set -agF status-right "#{E:@catppuccin_status_cpu}"
-set -agF status-right "#{E:@catppuccin_status_date_time}"
-set -agF status-right "#{E:@catppuccin_status_host}"
-
-# Initialize TMUX plugin manager *keep this line at the very bottom)
-
-run '~/.tmux/plugins/tpm/tpm'
-EOF
-
-success "Configured tmux"
+install_tmux() {
+    _wget_stdout https://sh.dongrote.com/tmux/install.sh | sh
 }
 
 if [ ! -e /etc/os-release ] ; then
@@ -191,6 +165,8 @@ case "$ID" in
 esac
 
 install_package tmux htop tree build-essential
+install_dotnet
+install_nodejs
 install_rust
-
-configure_tmux
+install_neovim
+install_tmux
