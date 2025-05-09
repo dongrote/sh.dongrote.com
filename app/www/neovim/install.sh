@@ -1,24 +1,19 @@
 #!/bin/sh
 
-RED="\033[0;31m"
-YELLOW="\033[1;33m"
-GREEN="\033[1;32m"
-CLR="\033[0m"
-
 NVIM_CONFIG_DIRECTORY="$HOME/.config/nvim"
 NVIM_LUA_DIRECTORY="$NVIM_CONFIG_DIRECTORY/lua"
 NVIM_PLUGIN_DIRECTORY="$NVIM_LUA_DIRECTORY/plugins"
 
 error() {
-    echo "${RED}[!] $@${CLR}" >&2
+    echo "[!] $@" >&2
 }
 
 info() {
-    echo "${YELLOW}[i] $@${CLR}"
+    echo "[i] $@"
 }
 
 success() {
-    echo "${GREEN}[+] $@${CLR}"
+    echo "[+] $@"
 }
 
 _sudo() {

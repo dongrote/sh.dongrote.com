@@ -1,20 +1,15 @@
 #!/bin/sh
 
-RED="\033[0;31m"
-YELLOW="\033[1;33m"
-GREEN="\033[1;32m"
-CLR="\033[0m"
-
 error() {
-    echo "${RED}[!] $@${CLR}" >&2
+    echo "[!] $@" >&2
 }
 
 info() {
-    echo "${YELLOW}[i] $@${CLR}"
+    echo "[i] $@"
 }
 
 success() {
-    echo "${GREEN}[+] $@${CLR}"
+    echo "[+] $@"
 }
 
 _sudo() {
@@ -41,13 +36,14 @@ _wget_stdout() {
 
 arch_package_map() {
     case "$1" in
+        "build-essential") echo -n "base-devel" ;;
         *) echo -n "$1" ;;
     esac
 }
 
 install_arch_package() {
     for pkg in $@; do
-        output=$(_sudo pacman -S --noconfirm $pkg 2>&1 >/dev/null)
+        output=$(_sudo pacman -S --noconfirm $(arch_package_map $pkg) 2>&1 >/dev/null)
         status=$?
         if [ $status -ne 0 ] ; then
             error "Error installing $pkg"
