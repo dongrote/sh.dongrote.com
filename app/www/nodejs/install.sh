@@ -33,12 +33,14 @@ _wget_stdout() {
 }
 
 install_nvm() {
+    info "installing node version manager"
     _wget_stdout https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_VERSION/install.sh | bash
 
     # setup access to NVM
     export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
+    info "installing nodejs lts"
     # install latest LTS NodeJS + NPM
     nvm install --lts
 }

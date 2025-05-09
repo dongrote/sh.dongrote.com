@@ -44,7 +44,7 @@ install_tmux() {
         exit 1
     fi
 
-    info "Reading /etc/os-release"
+    info "Installing tmux"
     . /etc/os-release
 
     case "$ID" in
@@ -73,11 +73,14 @@ rm -rf "$HOME/.config/tmux"
 mkdir -p "$HOME/.tmux/plugins"
 mkdir -p "$HOME/.config/tmux/plugins/catppuccin"
 
+info "cloning catppuccin"
 git clone -b v2.1.3 \
     https://github.com/catppuccin/tmux.git \
     "$HOME/.config/tmux/plugins/catppuccin/tmux" >/dev/null 2>&1
 
+info "cloning tmux-plugins/tpm"
 git clone https://github.com/tmux-plugins/tpm \
     "$HOME/.tmux/plugins/tpm" >/dev/null 2>&1
 
+info "fetching .tmux.conf"
 _wget https://sh.dongrote.com/tmux/tmux.conf "$HOME/.tmux.conf"

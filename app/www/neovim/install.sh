@@ -43,6 +43,7 @@ _wget() {
 }
 
 clean_existing_neovim() {
+    info "removing existing neovim files"
     rm -rf "$HOME/.config/nvim"
     rm -rf "$HOME/.local/state/nvim"
     rm -rf "$HOME/.local/share/nvim"
@@ -50,14 +51,17 @@ clean_existing_neovim() {
 }
 
 create_neovim_directories() {
+    info "creating \$HOME/bin"
     mkdir -p "$HOME/bin"
 }
 
 create_home_bin_neovim_symlink() {
+    info "creating neovim symlink"
     ln -s "$HOME/nvim-linux-x86_64/bin/nvim" "$HOME/bin/nvim"
 }
 
 fetch_neovim_config() {
+    info "fetching .config/nvim files"
     mkdir -p "$NVIM_LUA_DIRECTORY"
 
     _wget "https://sh.dongrote.com/neovim/init.lua" "$NMVIM_CONFIG_DIRECTORY/init.lua"
@@ -73,6 +77,7 @@ fetch_neovim_config() {
 }
 
 fetch_neovim_plugins() {
+    info "fetching neovim plugins"
     mkdir -p "$NVIM_PLUGIN_DIRECTORY"
     PLUGINS="fugitive.lua \
         lsp.lua \
@@ -91,6 +96,7 @@ fetch_neovim_plugins() {
 clean_existing_neovim
 create_neovim_directories
 
+info "downloading nightly neovim build"
 NVIM_TARBALL=nvim-linux-x86_64.tar.gz
 _wget "https://github.com/neovim/neovim/releases/download/nightly/$NVIM_TARBALL" "$NVIM_TARBALL" && \
   tar -zxf "$NVIM_TARBALL" -C "$HOME" && \

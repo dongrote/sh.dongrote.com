@@ -41,7 +41,7 @@ _wget() {
 get_system() {
     . /etc/os-release
 
-    echo "$ID"
+    echo -n "$ID"
 }
 
 arch_install() {
@@ -71,4 +71,5 @@ install_dotnet() {
     esac
 }
 
+info "installing dotnet sdk"
 install_dotnet
