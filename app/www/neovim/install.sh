@@ -92,14 +92,24 @@ fetch_neovim_plugins() {
     done
 }
 
+install_neovim() {
+    . /etc/os-release
+    case "$ID" in
+        "arch") _sudo pacman -S --noconfirm neovim ;;
+        *)
+            info "downloading nightly neovim build"
+            NVIM_TARBALL=nvim-linux-x86_64.tar.gz
+            _wget "https://github.com/neovim/neovim/releases/download/nightly/$NVIM_TARBALL" "$NVIM_TARBALL" && \
+              tar -zxf "$NVIM_TARBALL" -C "$HOME" && \
+              rm "$NVIM_TARBALL" && \
+              create_home_bin_neovim_symlink
+            ;;
+    esac
+}
+
 clean_existing_neovim
 create_neovim_directories
 
-info "downloading nightly neovim build"
-NVIM_TARBALL=nvim-linux-x86_64.tar.gz
-_wget "https://github.com/neovim/neovim/releases/download/nightly/$NVIM_TARBALL" "$NVIM_TARBALL" && \
-  tar -zxf "$NVIM_TARBALL" -C "$HOME" && \
-  rm "$NVIM_TARBALL" && \
-  create_home_bin_neovim_symlink && \
-  fetch_neovim_config && \
+install_neovim
+fetch_neovim_config && \
   fetch_neovim_plugins
