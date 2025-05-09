@@ -45,7 +45,7 @@ get_system() {
 }
 
 arch_install() {
-    _sudo pacman -S dotnet-sdk-8.0
+    _sudo pacman -S --noconfirm dotnet-sdk-8.0
 }
 
 azurelinux_install() {

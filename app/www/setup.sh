@@ -160,7 +160,7 @@ case "$ID" in
         ;;
 esac
 
-install_package tmux htop tree build-essential
+install_package tmux htop tree build-essential git
 install_dotnet
 install_nodejs
 install_rust
