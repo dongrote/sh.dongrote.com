@@ -28,12 +28,12 @@ _sudo() {
 _wget() {
     info "wget $1"
     retval=1
-    which wget 2>&1 >/dev/null
+    which wget >/dev/null 2>&1
     if [ $? -eq 0 ] ; then
         wget -qO "$2" "$1"
         retval=$?
     else
-        which curl 2>&1 >/dev/null
+        which curl >/dev/null 2>&1
         if [ $? -eq 0 ] ; then
             curl -so "$2" "$1"
             retval=$?

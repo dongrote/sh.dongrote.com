@@ -26,12 +26,12 @@ _sudo() {
 }
 
 _wget_stdout() {
-    which wget 2>&1 >/dev/null
+    which wget >/dev/null 2>&1
     if [ $? -eq 0 ] ; then
         wget -qO- "$1"
         return $?
     else
-        which curl 2>&1 >/dev/null
+        which curl >/dev/null 2>&1
         if [ $? -eq 0 ] ; then
             curl -so- "$1"
             return $?
@@ -47,7 +47,7 @@ arch_package_map() {
 
 install_arch_package() {
     for pkg in $@; do
-        output=$(_sudo pacman -S $pkg >/dev/null)
+        output=$(_sudo pacman -S --noconfirm $pkg 2>&1 >/dev/null)
         status=$?
         if [ $status -ne 0 ] ; then
             error "Error installing $pkg"
@@ -66,7 +66,7 @@ azurelinux_package_map() {
 
 install_azurelinux_package() {
     for pkg in $@; do
-        output=$(_sudo tdnf install -y $pkg >/dev/null)
+        output=$(_sudo tdnf install -y $pkg 2>&1 >/dev/null)
         status=$?
         if [ $status -ne 0 ] ; then
             error "Error installing $pkg"
@@ -114,13 +114,13 @@ install_package() {
 }
 
 install_rust() {
-    which cargo 2>&1 >/dev/null
+    which cargo >/dev/null 2>&1
     if [ $? -eq 0 ]; then
         info "Rust is already installed."
         return
     fi
 
-    stderr=$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs 2>&1 | sh -s -- -y 2>&1)
+    stderr=$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y 2>&1 >/dev/null)
     if [ $? -eq 0 ] ; then
         success "Installed Rust"
     else

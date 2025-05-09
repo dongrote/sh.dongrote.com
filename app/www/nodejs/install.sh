@@ -21,12 +21,12 @@ success() {
 _wget_stdout() {
     info "wget $1"
     retval=1
-    which wget 2>&1 >/dev/null
+    which wget >/dev/null 2>&1
     if [ $? -eq 0 ] ; then
         wget -qO- "$1"
         retval=$?
     else
-        which curl 2>&1 >/dev/null
+        which curl >/dev/null 2>&1
         if [ $? -eq 0 ] ; then
             curl -so- "$1"
             retval=$?
@@ -47,7 +47,7 @@ install_nvm() {
     nvm install --lts
 }
 
-which nvm 2>&1 >/dev/null
+which nvm >/dev/null 2>&1
 if [ $? -eq 0 ] ; then
     info "NVM is already installed"
     exit 0

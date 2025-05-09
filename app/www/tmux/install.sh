@@ -28,12 +28,12 @@ _sudo() {
 _wget() {
     info "wget $1"
     retval=1
-    which wget 2>&1 >/dev/null
+    which wget >/dev/null 2>&1
     if [ $? -eq 0 ] ; then
         wget -qO "$2" "$1"
         retval=$?
     else
-        which curl 2>&1 >/dev/null
+        which curl >/dev/null 2>&1
         if [ $? -eq 0 ] ; then
             curl -so "$2" "$1"
             retval=$?
@@ -57,7 +57,7 @@ install_tmux() {
             _sudo apt-get install -y tmux
             ;;
         "arch")
-            _sudo pacman -Sy tmux
+            _sudo pacman -S --noconfirm tmux
             ;;
         "azurelinux")
             _sudo tdnf install -y tmux
@@ -80,9 +80,9 @@ mkdir -p "$HOME/.config/tmux/plugins/catppuccin"
 
 git clone -b v2.1.3 \
     https://github.com/catppuccin/tmux.git \
-    "$HOME/.config/tmux/plugins/catppuccin/tmux" 2>&1 >/dev/null
+    "$HOME/.config/tmux/plugins/catppuccin/tmux" >/dev/null 2>&1
 
 git clone https://github.com/tmux-plugins/tpm \
-    "$HOME/.tmux/plugins/tpm" 2>&1 /dev/null
+    "$HOME/.tmux/plugins/tpm" >/dev/null 2>&1
 
 _wget https://sh.dongrote.com/tmux/tmux.conf "$HOME/.tmux.conf"
