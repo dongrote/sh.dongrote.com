@@ -65,7 +65,7 @@ fetch_neovim_config() {
 
     _wget "https://sh.dongrote.com/neovim/init.lua" "$NVIM_CONFIG_DIRECTORY/init.lua"
 
-    FILES="lazy.lua \
+    FILES="lazybs.lua \
         set.lua \
         remap.lua \
         autocmds.lua"
