@@ -15,7 +15,6 @@ success() {
 }
 
 _wget_stdout() {
-    info "wget $1"
     retval=1
     which wget >/dev/null 2>&1
     if [ $? -eq 0 ] ; then
