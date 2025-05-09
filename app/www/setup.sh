@@ -141,6 +141,23 @@ install_tmux() {
     _wget_stdout https://sh.dongrote.com/tmux/install.sh | sh
 }
 
+install_docker() {
+    case "$ID" in
+        "azurelinux")
+            install_package moby-engine moby-cli ca-certificates docker-compose
+            _sudo systemctl enable docker.service
+            _sudo systemctl start docker.service
+            ;;
+        "arch")
+            install_package docker-compose
+            ;;
+        *)
+            ;;
+    esac
+
+    _sudo usermod -aG docker $USER
+}
+
 if [ ! -e /etc/os-release ] ; then
     echo "Expected an /etc/os-release file but did not find one."
     exit 1
@@ -166,3 +183,4 @@ install_nodejs
 install_rust
 install_neovim
 install_tmux
+install_docker
