@@ -177,7 +177,14 @@ case "$ID" in
         ;;
 esac
 
-install_package htop tree build-essential git jq azure-cli
+install_package \
+  htop \
+  tree \
+  build-essential \
+  git \
+  jq \
+  azure-cli \
+  dos2unix
 install_dotnet
 install_nodejs
 install_rust
