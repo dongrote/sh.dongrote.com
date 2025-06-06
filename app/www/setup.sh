@@ -74,6 +74,7 @@ install_azurelinux_package() {
 
 debian_package_map() {
     case "$1" in
+        "man-pages") echo -n "manpages" ;;
         *) echo -n "$1" ;;
     esac
 }
@@ -184,7 +185,9 @@ install_package \
   git \
   jq \
   azure-cli \
-  dos2unix
+  dos2unix \
+  man-db \
+  man-pages
 install_dotnet
 install_nodejs
 install_rust
