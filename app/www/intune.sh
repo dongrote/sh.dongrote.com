@@ -42,4 +42,9 @@ xdg-settings set default-web-browser microsoft-edge.desktop
 # Update PAM password configuration; note the $ in retry=3$ to make sure it's the end of the line
 sudo sed -i 's/retry=3$/retry=3 dcredit=-1 ocredit=-1 ucredit=-1 lcredit=-1 minlen=12/' /etc/pam.d/common-password
 
+# Add Azure CLI; not necessary for intune, but we'll need it for work anyway
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs 2>/dev/null) main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
+sudo apt-get update
+sudo apt-get install -y azure-cli
+
 echo "You may consider rebooting here so that the microsoft-identity-broker service can be initialized."
