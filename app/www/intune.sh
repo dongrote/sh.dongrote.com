@@ -3,13 +3,13 @@
 # Source /etc/os-release
 . /etc/os-release
 
-if [[ "$NAME" != "Ubuntu" ]]
+if [ "$NAME" != "Ubuntu" ]
 then
   echo "This script is only written to support Ubuntu; found $NAME."
   exit 1
 fi
 
-if [[ "$VERSION_ID" != "24.04" ]]
+if [ "$VERSION_ID" != "24.04" ]
 then
   echo "This script is written for Ubuntu 24.04; found $VERSION_ID."
   exit 1
