@@ -1,0 +1,91 @@
+{
+    "editor.minimap.enabled": false,
+    "redhat.telemetry.enabled": false,
+    "remote.SSH.localServerDownload": "auto",
+    "wavespace.defaultExtensions": {
+        "dev": [
+            "ms-vscode.cpptools",
+            "rust-lang.rust-analyzer",
+            "ms-vscode.live-server"
+        ]
+    },
+    "workbench.startupEditor": "none",
+    "[csharp]": {
+        "editor.maxTokenizationLineLength": 2500
+    },
+    "editor.lineNumbers": "relative",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorSurroundingLines": 8,
+    "dotnet.preview.enableSupportForSlnx": false,
+    "vim.highlightedyank.enable": true,
+    "vim.foldfix": true,
+    "vim.leader": " ",
+    "git.blame.editorDecoration.enabled": false,
+    "git.blame.statusBarItem.enabled": true,
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "csharp": false
+    },
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<leader>", "m"],
+            "commands": [ "bookmarks.toggle" ],
+        },
+        {
+            "before": ["<leader>", "b"],
+            "commands": [ "bookmarks.list" ],
+        },
+        {
+            "before": ["<leader>", "w"],
+            "commands": [ "workbench.action.files.save" ],
+        },
+        {
+            "before": ["<leader>", "F"],
+            "commands": [ "workbench.action.showAllEditors" ],
+        },
+        {
+            "before": ["<leader>", "f"],
+            "commands": [ "workbench.action.quickOpen" ],
+        },
+        {
+            "before": ["<leader>", "i"],
+            "commands": [ "editor.action.goToImplementation" ],
+        },
+        {
+            "before": ["<leader>", "t"],
+            "commands": [ "testing.runAll" ],
+        },
+        {
+            "before": ["<leader>", "/"],
+            "commands": [ "editor.action.toggleBlockComment" ],
+        },
+        {
+            "before": ["K"],
+            "commands": [ "editor.action.showHover" ],
+        },
+        {
+            "before": ["<C-h>"],
+            "commands": [ "workbench.action.focusLeftGroup" ],
+        },
+        {
+            "before": ["<C-j>"],
+            "commands": [ "workbench.action.focusBelowGroup" ],
+        },
+        {
+            "before": ["<C-k>"],
+            "commands": [ "workbench.action.focusAboveGroup" ],
+        },
+        {
+            "before": ["<C-l>"],
+            "commands": [ "workbench.action.focusRightGroup" ],
+        },
+    ],
+    "csharp.inlayHints.enableInlayHintsForImplicitObjectCreation": true,
+    "csharp.inlayHints.enableInlayHintsForImplicitVariableTypes": true,
+    "csharp.inlayHints.enableInlayHintsForLambdaParameterTypes": true,
+    "csharp.inlayHints.enableInlayHintsForTypes": true,
+    "dotnet.inlayHints.enableInlayHintsForObjectCreationParameters": true,
+}
