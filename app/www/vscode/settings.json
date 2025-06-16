@@ -31,12 +31,16 @@
     },
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": ["<leader>", "m"],
-            "commands": [ "bookmarks.toggle" ],
+            "before": ["<leader>", "s", "h"],
+            "commands": [ "workbench.action.splitEditorDown" ],
+        },
+        {
+            "before": ["<leader>", "s", "v"],
+            "commands": [ "workbench.action.splitEditorRight" ],
         },
         {
             "before": ["<leader>", "b"],
-            "commands": [ "bookmarks.list" ],
+            "commands": [ "workbench.action.tasks.build" ],
         },
         {
             "before": ["<leader>", "w"],
